@@ -1,7 +1,7 @@
 package com.mdc.mraft.enums;
 
 public enum RoleEnum {
-    FOLLOWER(0, "Follower"), CANDIDATE(1, "Candidate"), LEADER(2, "LEADER");
+    FOLLOWER(0, "Follower"), CANDIDATE(1, "Candidate"), LEADER(2, "Leader");
 
     private final int id;
     private final String name;

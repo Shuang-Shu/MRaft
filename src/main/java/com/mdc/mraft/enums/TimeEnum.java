@@ -2,15 +2,7 @@ package com.mdc.mraft.enums;
 
 import java.util.concurrent.TimeUnit;
 
-public enum TimeEnum {
-    TIMEOUT(3), SLEEP_TIME(100);
-    private final int value;
-
-    TimeEnum(int time) {
-        value = time;
-    }
-
-    int getValue() {
-        return value;
-    }
+public class TimeEnum {
+    public static final int TIMEOUT = 3;
+    public static final int SLEEP_TIME = 100;
 }

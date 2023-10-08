@@ -1,4 +1,4 @@
-package com.mdc.mraft.common;
+package com.mdc.mraft.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplyMsg {
+public class ApplyMessage {
     private boolean commandValid;
     private Object command;
     private int commandIndex;

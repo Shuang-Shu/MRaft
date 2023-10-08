@@ -1,4 +1,4 @@
-package com.mdc.mraft.common;
+package com.mdc.mraft.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
