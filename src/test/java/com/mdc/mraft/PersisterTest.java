@@ -4,11 +4,9 @@ import com.mdc.mraft.entity.RaftState;
 import com.mdc.mraft.entity.Snapshot;
 import com.mdc.mraft.enums.RoleEnum;
 import com.mdc.mraft.persist.impl.FilePersister;
-import com.mdc.mraft.raft.config.RaftConfig;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 

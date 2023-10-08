@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
  * @description: TODO
  * @date 2023/10/2 14:24
  */
-public class MRpcSocketClient implements RpcClient {
-    private static final Logger logger = LoggerFactory.getLogger(MRpcSocketServer.class);
+public class MRpcSocketClient implements RaftRpcSource {
+    private static final Logger logger = LoggerFactory.getLogger(MRpcSocketTarget.class);
 
     RpcClientProxy clientProxy;
     RaftRpc service;

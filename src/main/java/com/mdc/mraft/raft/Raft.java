@@ -20,7 +20,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @description: A raft object which stands for a raft peer
  * @date 2023/10/2 14:25
  */
-public class Raft implements Service, RaftRpc, RpcServer {
+public class Raft implements Service, RaftRpc, RaftRpcTarget {
     private static final Logger logger = LoggerFactory.getLogger(Raft.class);
     private RaftConfig config;
     private RaftState state;
@@ -36,7 +36,7 @@ public class Raft implements Service, RaftRpc, RpcServer {
     private void initialWith(RaftConfig config) {
         try {
             hasInitialized = true;
-            config.getClients().forEach(RpcClient::open);
+            config.getClients().forEach(RaftRpcSource::open);
         } finally {
             for (var client : config.getClients()) {
                 try {
@@ -103,7 +103,7 @@ public class Raft implements Service, RaftRpc, RpcServer {
                 .lastLogTerm(lastLogTerm);
         boolean success = false;
         long maxTerm = state.getPersistentState().getCurrentTerm();
-        for (RpcClient client : config.getClients()) {
+        for (RaftRpcSource client : config.getClients()) {
             if (client.getId() != config.getId()) {
                 new Thread(() -> {
 

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author ShuangShu
  * @version 1.0
@@ -13,7 +15,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class RequestVoteArgs {
+public class RequestVoteArgs implements Serializable {
     long term;
     long candidateId;
     long lastLogIndex;

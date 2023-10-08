@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Collection;
 @Data
 @Builder
 @AllArgsConstructor
-public class AppendEntryArgs {
+public class AppendEntryArgs implements Serializable {
     long term;
     long leaderId;
     long prevLogIndex;

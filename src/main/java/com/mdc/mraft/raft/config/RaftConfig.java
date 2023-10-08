@@ -1,14 +1,13 @@
 package com.mdc.mraft.raft.config;
 
 import com.mdc.mraft.app.ApplyChannel;
-import com.mdc.mraft.transport.RpcClient;
-import com.mdc.mraft.transport.RpcServer;
+import com.mdc.mraft.transport.RaftRpcSource;
+import com.mdc.mraft.transport.RaftRpcTarget;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RaftConfig {
-    private List<RpcClient> clients; // contains all peers
-    private RpcServer server;
+    private List<RaftRpcSource> clients; // contains all peers
+    private RaftRpcTarget server;
     private ApplyChannel channel;
     private long id;
 

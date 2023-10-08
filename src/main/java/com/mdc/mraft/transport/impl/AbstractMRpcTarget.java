@@ -1,6 +1,5 @@
 package com.mdc.mraft.transport.impl;
 
-import com.esotericsoftware.kryo.KryoSerializable;
 import com.mdc.mraft.raft.Raft;
 import com.mdc.mraft.raft.RaftRpc;
 import com.mdc.mraft.transport.*;
@@ -14,52 +13,55 @@ import org.slf4j.LoggerFactory;
  * @author ShuangShu
  * @version 1.0
  * @description: TODO
- * @date 2023/10/2 14:24
+ * @date 2023/10/8 23:42
  */
-public class MRpcSocketServer implements RpcServer {
-    private static final Logger logger = LoggerFactory.getLogger(MRpcSocketServer.class);
+public abstract class AbstractMRpcTarget implements RaftRpcTarget {
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractMRpcTarget.class);
 
     public class ServerHandler implements RaftRpc {
         @Override
         public RequestVoteResponse requestVote(RequestVoteArgs requestVoteArgs) {
-            return MRpcSocketServer.this.getRaft().requestVote(requestVoteArgs);
+            return AbstractMRpcTarget.this.getRaft().requestVote(requestVoteArgs);
         }
 
         @Override
         public AppendEntryResponse appendEntry(AppendEntryArgs appendEntryArgs) {
-            return MRpcSocketServer.this.getRaft().appendEntry(appendEntryArgs);
+            return AbstractMRpcTarget.this.getRaft().appendEntry(appendEntryArgs);
         }
     }
 
-    SocketRpcServer server;
-    MRpcSocketServer.ServerHandler serverHandler = new MRpcSocketServer.ServerHandler();
-    Raft raft;
-    int port;
+    protected RpcServer server;
+    protected AbstractMRpcTarget.ServerHandler serverHandler = new AbstractMRpcTarget.ServerHandler();
+    protected Raft raft;
+    protected int port;
 
     @Override
-    public Raft getRaft() {
+    public final Raft getRaft() {
         return this.raft;
     }
 
     @Override
-    public void setRaft(Raft raft) {
+    public final void setRaft(Raft raft) {
         this.raft = raft;
     }
 
     @Override
-    public void initialWith(int port, Raft raft) {
+    public final void initialWith(int port, Raft raft) {
         this.port = port;
         this.raft = raft;
         var registry = new DefaultRegistry();
         var raftService = new ServerHandler();
         var serializer = new KryoSerializer();
         registry.regsiter(raftService);
-        server = new SocketRpcServer(port);
+        // initial the server implement
+        server = createRpcServer();
         server.initWith(registry, serializer);
     }
 
+    protected abstract RpcServer createRpcServer();
+
     @Override
-    public void open() {
+    public final void open() {
         if (server == null) {
             logger.error("server is null");
             return;

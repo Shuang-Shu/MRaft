@@ -1,8 +1,6 @@
 package com.mdc.mraft.transport;
 
-import com.mdc.mraft.raft.Raft;
 import com.mdc.mraft.raft.RaftComponent;
-import com.mdc.mraft.raft.RaftRpc;
 
 /**
  * @author ShuangShu
@@ -10,7 +8,7 @@ import com.mdc.mraft.raft.RaftRpc;
  * @description: TODO
  * @date 2023/10/2 14:21
  */
-public interface RpcClient extends RaftComponent, AutoCloseable {
+public interface RaftRpcSource extends RaftComponent, AutoCloseable {
     /**
      * @description: Get the server id of corresponding server.
      * @param:

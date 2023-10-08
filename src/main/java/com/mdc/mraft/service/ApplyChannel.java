@@ -1,4 +1,4 @@
-package com.mdc.mraft.app;
+package com.mdc.mraft.service;
 
 import com.mdc.mraft.entity.ApplyMessage;
 
